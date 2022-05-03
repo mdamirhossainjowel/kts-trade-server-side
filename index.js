@@ -14,7 +14,6 @@ app.listen(port, () => {
   console.log(port);
 });
 
-// Replace the uri string with your MongoDB deployment's connection string.
 const uri =
   "mongodb+srv://dbAlaeze:Alaeze@cluster0.lhcdr.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
 
