@@ -1,6 +1,6 @@
 const express = require("express");
 const cors = require("cors");
-const { MongoClient } = require("mongodb");
+const { MongoClient, ObjectId } = require("mongodb");
 
 const app = express();
 app.use(cors());
@@ -37,6 +37,23 @@ async function run() {
       const cursor = Products.find(query);
       const products = await cursor.toArray();
       res.send(products);
+    });
+    app.get("/product/:id", async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: ObjectId(id) };
+      const product = await Products.findOne(query);
+      res.send(product);
+    });
+    app.put("/product/:id", async (req, res) => {
+      const id = req.params.id;
+      const newdata = req.body;
+      const query = { _id: ObjectId(id) };
+      const product = await Products.findOneAndUpdate([
+        { _query },
+        { $set: { quantity: newdata } },
+      ]);
+
+      res.send(product);
     });
   } finally {
   }
